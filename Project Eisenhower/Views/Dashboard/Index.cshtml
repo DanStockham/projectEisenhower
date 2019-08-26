@@ -1,0 +1,78 @@
+﻿@using Project_Eisenhower.ViewModels;
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    let events = JSON.parse('@Html.Raw(Json.Serialize(Model,  new JsonSerializerSettings() {
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    }))');
+
+    console.log(events)
+</script>
+
+@section Scripts {
+    <script src="~/lib/paginationjs/pagination.js"></script>
+    <script src="~/js/paginate.js"></script>
+}
+
+<h1>Dashboard</h1>
+<div style="height: 20px;"></div>
+<div class="row">
+    <div class="col-md-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="published-tab" data-toggle="tab" href="#published" role="tab" aria-controls="published" aria-selected="false">Published</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" id="draft-tab" data-toggle="tab" href="#draft" role="tab" aria-controls="draft" aria-selected="true">Draft</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade" id="published" role="tabpanel" aria-labelledby="published-tab">
+                <ul class="list-group list-group-flush"></ul>
+                <nav aria-label="pagination" class="paginate-container"></nav>
+            </div>
+            <div class="tab-pane fade show active" id="draft" role="tabpanel" aria-labelledby="draft-tab">
+                <ul class="list-group list-group-flush"></ul>
+                <nav aria-label="pagination" class="paginate-container"></nav>
+            </div>
+            <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+                <ul class="list-group list-group-flush">
+                </ul>
+                <nav aria-label="pagination" class="paginate-container">
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <h4 class="location-header">Location</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <p style="margin-bottom: 0;">@Model.Fields[0].Addrs.StreetNumber @Model.Fields[0].Addrs.Street</p>
+                    <p>@Model.Fields[0].Addrs.City, @Model.Fields[0].Addrs.State, @Model.Fields[0].Addrs.Zipcode</p>
+                    <ul class="location-actions">
+                        <li><a href="@Url.Action("Edit", "Fields", new { id = Model.Fields[0].FieldId })">Edit</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="location-header">Contact</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <ul class="location-actions">
+                        <li><a href="@Url.Action("Edit", "Fields", new { id = Model.Fields[0].FieldId })">Edit</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

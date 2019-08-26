@@ -1,0 +1,28 @@
+﻿@model IEnumerable<List<Project_Eisenhower.Models.Event>>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    <div class="row">
+        @foreach(var evnt in Model.ToList()[i]) {
+
+            var date = evnt.StartDate.Value;
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x50" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@evnt.OpName</h5>
+                        <p class="card-text">@date.ToString("ddd"), @date.ToString("MMMM") @date.Day, @date.ToShortTimeString()</p>
+                        <p class="card-text">$@Math.Round(evnt.Fee.Value, 2)</p>   
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

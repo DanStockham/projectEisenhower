@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "paginationjs@2.1.4",
+      "destination": "wwwroot/lib/paginationjs/"
+    }
+  ,
+{
+  "library": "font-awesome@5.9.0",
+  "destination": "wwwroot/lib/font-awesome/"
+}
+]
+}
