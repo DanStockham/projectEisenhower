@@ -45,7 +45,7 @@
     }
 
     function listItemTemplate(data) {
-        let itemElements = data.map(item => {
+        let itemElements = data.map(function (item) {
             let date = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }).format(new Date(item.StartDate));
             return `
                <li class="list-group-item">
@@ -70,7 +70,7 @@
     }
 
     return {
-        invokePagination,
+        invokePagination
     };
 })($, events);
 

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Project_Eisenhower.Models;
 using Project_Eisenhower.Repositories;
+using Newtonsoft.Json;
 
 namespace Project_Eisenhower
 {
@@ -50,6 +51,9 @@ namespace Project_Eisenhower
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             //Password Strength Setting
             services.Configure<IdentityOptions>(options =>

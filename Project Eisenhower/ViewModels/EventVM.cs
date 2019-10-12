@@ -1,7 +1,4 @@
-﻿using MoreLinq.Extensions;
-using Project_Eisenhower.Models;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,24 +7,13 @@ namespace Project_Eisenhower.ViewModels
 {
     public class EventVM
     {
-       public List<Event> EventList { get; set; }
-       public IEnumerable<List<Event>> BatchList { get; set; }
-
-       public EventVM(IEnumerable<Event> eventList)
-        {
-            this.EventList = eventList.ToList();
-        }
-
-       public void BatchEvent()
-        {
-            var batchList = new List<List<Event>>();
-
-            foreach(var Event in EventList.Batch(3))
-            {
-                batchList.Add(Event.ToList());
-            }
-
-            BatchList = batchList;
-        }
+        public int EventId { get; set; }
+        public string OpName { get; set; }
+        public string FieldName { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string Description { get; set; }
+        public decimal? Fee { get; set; }
+        public string Image { get; set; }
     }
 }

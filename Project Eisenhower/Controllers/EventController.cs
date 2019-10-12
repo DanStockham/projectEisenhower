@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project_Eisenhower.Models;
 using Project_Eisenhower.Repositories;
+using Newtonsoft;
 
 namespace Project_Eisenhower.Controllers
 {
@@ -22,11 +23,28 @@ namespace Project_Eisenhower.Controllers
         }
 
         // GET: Event
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var batchEvent = _PEDEVDBRepo.GetEvent();
+            var batchEvent = await _PEDEVDBRepo.GetEvent(1);
 
             return View(batchEvent);
+        }
+
+        [Route("/paginate")]
+        public async Task<JsonResult> ScrollLoading([FromQuery(Name = "page")] string pageNum)
+        {
+            try
+            {
+                var batchEvent = await _PEDEVDBRepo.GetEvent(int.Parse(pageNum));
+
+                return Json(batchEvent);
+            }
+            catch(Exception e)
+            {
+                return Json(e);
+            }
+            
+            
         }
 
         // GET: Event/Details/5

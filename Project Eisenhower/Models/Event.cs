@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Eisenhower.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace Project_Eisenhower.Models
@@ -29,5 +30,20 @@ namespace Project_Eisenhower.Models
         public virtual Eventtatus StatusNavigation { get; set; }
         public virtual ICollection<FpsRanges> FpsRanges { get; set; }
         public virtual ICollection<RulesOfEngagement> RulesOfEngagement { get; set; }
+
+        public EventVM ToViewModel()
+        {
+            return new EventVM()
+            {
+               EventId = EventId,
+               OpName = OpName,
+               FieldName = Field.FieldName,
+               StartDate = StartDate,
+               EndDate = EndDate,
+               Description = Description,
+               Fee = Fee,
+               Image = Image
+            };
+        }
     }
 }

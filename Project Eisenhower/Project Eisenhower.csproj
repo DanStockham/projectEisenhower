@@ -7,8 +7,17 @@
     <RootNamespace>Project_Eisenhower</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
 
   <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />

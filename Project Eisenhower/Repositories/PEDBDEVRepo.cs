@@ -21,11 +21,16 @@ namespace Project_Eisenhower.Repositories
             
         }
 
-        public IEnumerable<List<Event>> GetEvent()
-        {
-            var eventList = _db.Event.Include(e => e.Field).Skip(0).Take(10).ToList();
-            var vm = new EventVM(eventList);
-
+        public async Task<IEnumerable<List<EventVM>>> GetEvent(int page)  
+        {   
+            int slice = page * 10;
+            var eventList = await _db.Event.Include(e => e.Field).Skip(slice).Take(10).ToListAsync();
+            var vm = new EventListVM();
+            foreach (var item in eventList)
+            {
+                vm.EventList.Add(item.ToViewModel());
+            }
+            
             vm.BatchEvent();
 
             return vm.BatchList;
